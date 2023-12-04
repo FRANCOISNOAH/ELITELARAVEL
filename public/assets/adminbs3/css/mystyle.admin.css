@@ -1,0 +1,121 @@
+/*
+* Font config ...
+font-family: 'Baloo 2', sans-serif;
+font-family: 'Rubik', sans-serif;
+*/
+
+/* Font configuration */
+.bloo-color {
+    color: #0080BC;
+}
+.bg-bloo {
+    background-color: #0080BC;
+    color: #fff;
+}
+.bloo-outline {
+    border: 2px solid #0080BC;
+    color: #0080BC;
+    background-color: #fff;
+}
+.bloo-outline:hover {
+    background-color: #0080BC;
+    color: #fff;
+}
+a.primary-text-color:hover, .primary-text-color {
+    color: #A9A9A9;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+    font-family: 'Baloo 2', sans-serif;
+    color: #0080BC;
+    font-weight: 700;
+}
+.light-title {
+    font-size: 1.2rem;
+}
+html {
+    font-size: 16px;;
+}
+body, .content-wrapper {
+    font-family: 'Baloo 2', sans-serif;
+    background-color: #fff;
+    color: #A9A9A9;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Navbar style */
+header.main-header{
+    background-color: #0080BC;
+}
+.skin-black-light .main-header .navbar > .sidebar-toggle {
+    color: #0080BC;
+    border-right: 0px solid transparent;
+    font-size: 1.5rem;
+}
+.skin-black-light .main-header .logo {
+	background-color: #0080BC;
+	color: #fff;
+	border-bottom: none;
+	border-right: none;
+}
+.skin-black-light .main-header .navbar .navbar-custom-menu .navbar-nav > li > a, .skin-black-light .main-header .navbar .navbar-right > li > a {
+	border-left: 1px none;
+	border-right-width: 0;
+}
+.skin-black-light .main-header {
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+	box-shadow: none;
+}
+.skin-black-light .main-sidebar {
+	background-color: #0080BC;
+    box-shadow: 0 14px px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22) !important;
+    width: 230px;
+    margin-top: 15px;
+}
+
+.navbar li a i {
+    color: #0080BC;
+    font-size: 1.5rem;
+}
+
+/* aside Menu */
+.skin-black-light .sidebar-menu > li > a {
+    font-weight: 400;
+    color: white;
+}
+.skin-black-light .sidebar-menu > li > a > i {
+    font-size: 1.1rem;
+    margin-left: .05rem;
+    margin-right: .2rem;
+    width: 1.6rem;
+    font-weight: 900;
+}
+.skin-black-light .sidebar-menu > li {
+    border-bottom: 1px solid white;
+}
+.skin-black-light .main-sidebar {
+    background-color: #0080BC;
+}
+.skin-black-light .sidebar-menu > li.active {
+	border-left-color: #fff;
+}
+.skin-black-light .sidebar-menu > li.active a {
+	color: #0080BC;
+    font-weight: 400;
+}
+.skin-black-light .sidebar-menu > li:hover a {
+	background-color: #0080BC00;
+    color: #fff;
+}
+
+/* /aside menu */
+
+
+/* Gestion Responsive */
+@media screen and (max-width: 767px) {
+    .skin-black-light .main-header .logo {
+        display: none;
+    }
+}

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Conditional extends Model
 {
     use HasFactory;
+
+    public function conditional_fields(){
+        return $this->hasMany(Conditional_field::class);
+    }
 }

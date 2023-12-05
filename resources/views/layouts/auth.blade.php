@@ -109,7 +109,6 @@
 <script src="{{asset("assets/js/dashboard/admin-lte/adminlte.min.js")}}"></script>
 <script src="{{asset("assets/js/plugins/uniform.min.js")}}"></script>
 <script src="{{asset("assets/js/custom/pages/validation.js")}}"></script>
-{{--<script src="{{asset("assets/js/custom/pages/auth.js")}}"></script>--}}
 <!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>

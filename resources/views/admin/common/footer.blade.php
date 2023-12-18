@@ -5,4 +5,3 @@
         &copy; {{ date('Y') }} Bloo. @lang("All rights reserved")
     </div>
 </footer>
-<!-- ./wrapper -->

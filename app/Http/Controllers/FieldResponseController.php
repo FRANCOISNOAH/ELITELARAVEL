@@ -3,63 +3,110 @@
 namespace App\Http\Controllers;
 
 use App\Models\FieldResponse;
+use App\Models\Form;
+use App\Models\FormField;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FieldResponseController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @param Request $request
+     * @param $form
+     * @return \Illuminate\Http\JsonResponse|void
+     * @throws \Exception
      */
-    public function index()
+    public function store(Request $request, $form)
     {
-        //
+        if ($request->ajax()) {
+            $form = Form::where('code', $form)->first();
+
+            $current_user = Auth::user();
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'error_message' => 'validation_failed',
+                    'error' =>  'Form is invalid',
+                ]);
+            }
+
+            $templates = get_form_templates();
+
+
+            $validator = Validator::make($request->all(), [
+                'template' => 'required|string|in:' . implode(',', $templates->pluck('alias')->all())
+            ]);
+
+            if ($validator->fails()) {
+                $errors = collect($validator->errors())->flatten();
+                return response()->json([
+                    'success' => false,
+                    'error_message' => 'validation_failed',
+                    'error' =>  $errors->first()
+                ]);
+            }
+
+            $attribute_prefix = str_replace('-', '_', $request->template) . '.' . bin2hex(random_bytes(4));
+
+            $field = new FormField([
+                'template' => $request->template,
+                'attribute' => $attribute_prefix,
+                'filled' => false,
+            ]);
+
+            $form->fields()->save($field);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'field' => $field->id,
+                    'sub_template' => (get_form_templates($request->template))['sub_template'],
+                    'attribute' => $attribute_prefix,
+                    'has_options' => (in_array($request->template, $templates->where('attribute_type', 'array')->pluck('alias')->all()))
+                ]
+            ]);
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @param Request $request
+     * @param $form
+     * @return \Illuminate\Http\JsonResponse|void
      */
-    public function create()
+    public function destroy(Request $request, $form)
     {
-        //
-    }
+        if ($request->ajax()) {
+            $form = Form::where('code', $form)->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'error_message' => 'validation_failed',
+                    'error' =>  'Le formulaire est invalide',
+                ]);
+            }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(FieldResponse $fieldResponse)
-    {
-        //
-    }
+            $field = $form->fields()->where('id', $request->form_field)->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(FieldResponse $fieldResponse)
-    {
-        //
-    }
+            if (!$field || $field->form_id !== $form->id) {
+                return response()->json([
+                    'success' => false,
+                    'error_message' => 'validation_failed',
+                    'error' =>  "Le champ du formulaire n'est pas valide",
+                ]);
+            }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, FieldResponse $fieldResponse)
-    {
-        //
-    }
+            $field->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FieldResponse $fieldResponse)
-    {
-        //
+            if (!$form->fields()->count()) {
+                $form->status = Form::STATUS_DRAFT;
+                $form->save();
+            }
+
+            return response()->json([
+                'success' => true
+            ]);
+        }
     }
 }

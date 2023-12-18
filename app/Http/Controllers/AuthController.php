@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\RegisterMail;
 use App\Models\Company;
 use App\Models\Country;
+use App\Models\Form;
 use App\Models\SignHistory;
 use App\Models\User;
 use Carbon\Carbon;
@@ -83,6 +84,32 @@ class AuthController extends Controller
         }
 
     }
+
+
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function start($id): RedirectResponse
+    {
+        $form = Form::find($id);
+        $form->status = FORM::STATUS_OPEN;
+        $form->update();
+        return back()->with('success', 'Operation debuté avec succès.');
+    }
+
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function end($id): RedirectResponse
+    {
+        $form = Form::find($id);
+        $form->status = FORM::STATUS_CLOSED;
+        $form->update();
+        return back()->with('success', 'Operation terminé avec succès.');
+    }
+
 
     public function confirmregister(){
         return view('auth.confirmregister');
@@ -338,5 +365,18 @@ class AuthController extends Controller
     public function confirm(){
         return view('auth.passwords.confirm');
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
+    }
+
 
 }

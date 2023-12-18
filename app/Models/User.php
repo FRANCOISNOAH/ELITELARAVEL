@@ -82,14 +82,16 @@ class User extends Authenticatable
         return $this->belongsTo(City::class);
     }
 
-    public function forms()
+    public function forms(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Form::class);
     }
 
-    public function operations()
+    public function operations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Operation::class,'operation_users');
     }
+
+
 
 }

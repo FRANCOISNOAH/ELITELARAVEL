@@ -43,6 +43,7 @@
                 <div class="dropdown-divider"></div>
                 <form method="post" action="{{route("logout")}}" id="logout">
                     @csrf
+                    @method("DELETE")
                 </form>
                 <a href="#" class="dropdown-item" onclick="document.getElementById('logout').submit();">
                     <i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter

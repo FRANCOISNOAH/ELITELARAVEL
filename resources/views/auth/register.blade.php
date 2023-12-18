@@ -14,22 +14,24 @@
 
         <div class="mb-2">
             <label class="mb-0">Nom de l'entreprise</label>
-            <input type="text" class="form-control" name="company">
+            <input type="text" class="form-control" id="company" name="company">
+            <span  class="company help-block text-center text-danger"> </span>
         </div>
 
         <div class="mb-2">
             <label class="mb-0">Nom</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" id="name" name="name">
+            <span  class="name help-block text-center text-danger"> </span>
         </div>
 
         <div class="mb-2">
             <label class="mb-0">Pays</label>
-            <select name="country" class="form-control">
+            <select id="country" name="country" class="form-control">
                 @foreach($countries as $country)
                     <option value="{{$country->id}}">{{$country->name_fr}}</option>
                 @endforeach
-
             </select>
+            <span  class="country help-block text-center text-danger"> </span>
         </div>
 
         <div class="mb-2">
@@ -39,8 +41,9 @@
                     <span class="input-group-text" id="alt-addon"><i class="fa fa-user"></i></span>
                 </div>
                 <input type="text" class="form-control" arial-label="Email"
-                       aria-describedby="alt-addon" name="email"/>
+                       aria-describedby="alt-addon" id="email" name="email"/>
             </div>
+            <span  class="email help-block text-center text-danger"> </span>
         </div>
 
 
@@ -52,6 +55,7 @@
                 </div>
                 <input type="password" class="form-control"
                        aria-describedby="login-password"
+                       id="password"
                        name="password"
                        data-toggle="password"
                 >
@@ -59,6 +63,7 @@
                     <span class="input-group-text" id="alt-addon"><i class="fas fa-eye"></i></span>
                 </div>
             </div>
+            <span  class="password help-block text-center text-danger"> </span>
         </div>
 
 
@@ -149,17 +154,20 @@
                     },
                     error: function (error) {
                         let errors = error.responseJSON.errors;
-                        $(".error-message").empty(); // Vide le contenu précédent
 
-                        for (let field in errors) {
-                            if (errors.hasOwnProperty(field)) {
-                                let errorHTML = "<span>" + errors[field].join(', ') + "</span><br>";
-                                $(".error-message").append(errorHTML);
+                        for (let key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                let errorMessage = errors[key][0];
+                                let element = $("#" + key);
+                                if (element.length > 0) {
+                                    element.addClass('is-invalid');
+                                }
+                                let errorElement = $("." + key);
+                                if (errorElement.length > 0) {
+                                    errorElement.empty().text(errorMessage);
+                                }
                             }
                         }
-                        setTimeout(function () {
-                            $(".error-message").empty();
-                        }, 10000);
                     }
                 });
             });

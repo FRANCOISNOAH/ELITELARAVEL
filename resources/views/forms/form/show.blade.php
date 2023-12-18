@@ -48,11 +48,13 @@
             </h5>
         </div>
 
+        @isset($operation)
         <div class="col-lg-2">
             <a  href="{{ route('operation.show', [$operation->id]) }}" style="color:#0065a1; margin-left:0px; " class="position-right legitRipple" title="{{ trans("Demarrer l'operation") }}">
                 <span style="background-color: #0065A1; border-color: #0065A1;" class="label bg-{{ $symbol['color'] }} position-right">Ajouter les operateurs </span>
             </a>
         </div>
+        @endisset
 
         <div class="heading-elements">
             <div class="btn-group heading-btn">

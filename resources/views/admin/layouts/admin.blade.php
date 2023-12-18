@@ -326,7 +326,9 @@
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
+                @if(auth()->user()->hasRole(['Client']))
                 @include('admin.common.stat')
+                @endif
                 @yield('ariane')
             </div>
         </div>

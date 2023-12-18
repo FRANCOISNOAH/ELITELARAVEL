@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Country;
 use App\Models\User;
+use Dflydev\DotAccessData\Data;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -46,6 +49,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'country' => 'required|integer',
+            'company' => 'string',
             'user_id' => 'integer',
             'password' => ['required', Password::min(8)
                 ->letters()
@@ -64,12 +68,22 @@ class UserController extends Controller
         $user->activated = $request["activate"];
         if(auth()->user()->hasRole('Client')){
             $user->company_id = auth()->user()->company_id;
+        }else {
+            if(isset($request['user_id'])){
+                $data = User::findOrFail((int) $request['user_id']);
+                $user->company_id = $data->company_id;
+            }
+        }
+        if(isset($request['company'])){
+            /**
+             * Creation de l'entreprise
+             */
+            $company = new Company();
+            $company->name = $request["company"];
+            $company->save();
+            $user->company_id = $company->id;
         }
         $user->country_id = $request["country"];
-        if(isset($request['user_id'])){
-          $data = User::findOrFail((int) $request['user_id']);
-            $user->company_id = $data->company_id;
-        }
         $user->save();
         $user->assignRole((int)$request["role"]);
 
@@ -79,7 +93,6 @@ class UserController extends Controller
         } else {
             return redirect()->route('user.index')->with('success', 'Utilisateur crée avec succès.');
         }
-
 
     }
 
@@ -96,7 +109,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        $countries = Country::all();
+        $clients = User::role('Client')->with('roles','country','company')->get();
+        return  view('admin.user.edit',compact('roles','countries','clients','user'));
     }
 
     /**
@@ -104,14 +120,59 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $request->validate([
+            'role' => 'integer',
+            'activate' => 'required|integer',
+            'name' => 'required|string',
+            'password' => [ Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+            ],
+            'password_confirmation' => 'same:password'
+        ]);
+        $user->update($request->all());
+
+        if ($request->ajax()) {
+            $redirectRoute = route('user.index');
+            return response()->json(['status' => 'success', 'redirect' => $redirectRoute]);
+        } else {
+            return redirect()->route('user.index')->with('success', 'Utilisateur crée avec succès.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
-        //
+        $user->delete();
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
+     * Activate User
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function activate($id){
+        $user = User::find($id);
+        $user->activated = true;
+        $user->save();
+        return back();
+    }
+
+    /**
+     * Desactivate User
+     * @param $id
+     * @return void
+     */
+    public function deactivate($id){
+        $user = User::find($id);
+        $user->activated = false;
+        $user->save();
     }
 }

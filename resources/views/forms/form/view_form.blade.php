@@ -9,7 +9,7 @@
 
 @section('title', " {$page}")
 
-@extends('layouts.auth')
+@extends('layouts.form')
 
 
 @section('content')
@@ -23,7 +23,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h5 class="panel-title">{{ $page }}</h5>
+                        <h5 class="panel-title">{{ $page }}2</h5>
                     </div>
                     @php $formatted_fields = []; @endphp
 
@@ -123,6 +123,7 @@
                                             </div>
 
                                             <div class="text-left mt-20">
+
                                                 <button id="submit"
                                                         type="{{ ($view_type === 'form') ? 'submit' : 'button' }}"
                                                         class="btn btn-primary" data-loading-text="Please Wait..."
@@ -175,6 +176,7 @@
     </script>
     <script type="text/javascript">
         window.onload = function () {
+            @if(isset($conditions))
             @foreach ($conditions as $item)
             $("#user-form input[name='{{$item->field_name}}']").click(function () {
                 if ($('input:radio[name="{{$item->field_name}}"]:checked').val() === "{{$item->value}}") {
@@ -193,6 +195,7 @@
                 }
             });
             @endforeach
+            @endif
         };
     </script>
     @include('forms.partials._script-view')

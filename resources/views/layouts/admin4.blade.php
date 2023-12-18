@@ -58,6 +58,211 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     <style>
+
+        .card-bloo {
+            color: #fff;
+            background-color: #0080BC;
+        }
+
+
+        .page-link:hover {
+            z-index: 2;
+            color: #34c0e7;
+            text-decoration: none;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .page-link:focus {
+            z-index: 2;
+            outline: 0;
+            -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.25);
+        }
+
+        .page-link:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+
+        .page-item:first-child .page-link {
+            margin-left: 0;
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .page-item:last-child .page-link {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #78d5ef;
+            border-color: #78d5ef;
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        .pagination-lg .page-link {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .pagination-lg .page-item:first-child .page-link {
+            border-top-left-radius: 0.3rem;
+            border-bottom-left-radius: 0.3rem;
+        }
+
+        .pagination-lg .page-item:last-child .page-link {
+            border-top-right-radius: 0.3rem;
+            border-bottom-right-radius: 0.3rem;
+        }
+
+        .pagination-sm .page-link {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .pagination-sm .page-item:first-child .page-link {
+            border-top-left-radius: 0.2rem;
+            border-bottom-left-radius: 0.2rem;
+        }
+
+        .pagination-sm .page-item:last-child .page-link {
+            border-top-right-radius: 0.2rem;
+            border-bottom-right-radius: 0.2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+
+        .badge:empty {
+            display: none;
+        }
+
+        .btn .badge {
+            position: relative;
+            top: -1px;
+        }
+
+        .badge-pill {
+            padding-right: 0.6em;
+            padding-left: 0.6em;
+            border-radius: 10rem;
+        }
+
+        .badge-primary {
+            color: #212529;
+            background-color: #78d5ef;
+        }
+
+        .badge-primary[href]:hover, .badge-primary[href]:focus {
+            color: #212529;
+            text-decoration: none;
+            background-color: #4ac7ea;
+        }
+
+        .badge-secondary {
+            color: #fff;
+            background-color: #6c757d;
+        }
+
+        .badge-secondary[href]:hover, .badge-secondary[href]:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #545b62;
+        }
+
+        .badge-success {
+            color: #fff;
+            background-color: #28a745;
+        }
+
+        .badge-success[href]:hover, .badge-success[href]:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #1e7e34;
+        }
+
+        .badge-info {
+            color: #fff;
+            background-color: #17a2b8;
+        }
+
+        .badge-info[href]:hover, .badge-info[href]:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #117a8b;
+        }
+
+        .badge-warning {
+            color: #212529;
+            background-color: #ffc107;
+        }
+
+        .badge-warning[href]:hover, .badge-warning[href]:focus {
+            color: #212529;
+            text-decoration: none;
+            background-color: #d39e00;
+        }
+
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+
+        .badge-danger[href]:hover, .badge-danger[href]:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #bd2130;
+        }
+
+        .badge-light {
+            color: #212529;
+            background-color: #f8f9fa;
+        }
+
+        .badge-light[href]:hover, .badge-light[href]:focus {
+            color: #212529;
+            text-decoration: none;
+            background-color: #dae0e5;
+        }
+
+        .badge-dark {
+            color: #fff;
+            background-color: #343a40;
+        }
+
+        .badge-dark[href]:hover, .badge-dark[href]:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: #1d2124;
+        }
+
+
+        .badge-primary {
+            color: #212529;
+            background-color: #78d5ef;
+        }
+
         /* ====== Global ====== */
         /* 1. Font configuration */
 
@@ -118,6 +323,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         .sidebar nav ul.nav li.nav-item.active {
             background-color: #fff;
         }
+
 
         .sidebar nav ul.nav li.nav-item {
             border-bottom: 1px solid #fff;
@@ -331,6 +537,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
+
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -376,6 +584,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="dropdown-divider"></div>
                     <form method="post" action="{{route("logout")}}" id="logout">
                         @csrf
+                        @method('DELETE')
                     </form>
                     <a href="#" class="dropdown-item" onclick="document.getElementById('logout').submit();">
                         <i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter
@@ -387,7 +596,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </nav>
     <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
+
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
@@ -406,25 +615,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         with font-awesome or any other icon font library -->
 
                     @if(auth()->user()->roles->pluck('id')[0] === 1)
-                    <li  class="nav-item ">
-                        <a href="{{route('operation.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Tableau de bord
-                            </p>
-                        </a>
-                    </li>
+                        <li class="nav-item <?php echo (Str::startsWith($route, 'operation')) ? "active" : '' ?> ">
+                            <a href="{{route('operation.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Tableau de bord
+                                </p>
+                            </a>
+                        </li>
                     @endif
 
                     @if(auth()->user()->roles->pluck('id')[0] !== 1)
-                    <li  class="nav-item">
-                        <a href="{{route('operation.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Opérations
-                            </p>
-                        </a>
-                    </li>
+                        <li class="nav-item <?php echo (Str::startsWith($route, 'operation')) ? "active" : '' ?>">
+                            <a href="{{route('operation.index')}}" class="nav-link ">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Opérations
+                                </p>
+                            </a>
+                        </li>
                     @endif
 
                     <li class="nav-item">
@@ -437,7 +646,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
 
 
-                    <li class="nav-item">
+                    <li class="nav-item <?php echo (Str::startsWith($route, 'user')) ? "active" : '' ?>">
                         <a href="{{route('user.index')}}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -447,46 +656,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
 
                     @if(auth()->user()->roles->pluck('id')[0] === 1)
-                    <li  class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-money-check-alt"></i>
-                            <p>
-                                Paiements
-                            </p>
-                        </a>
-                    </li>
-                    <li  class="nav-item">
-                        <a href="{{route('role.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>
-                                Roles
-                            </p>
-                        </a>
-                    </li>
-                    <li  class="nav-item">
-                        <a href="{{route('permission.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>
-                                Permissions
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('countries.index')}}" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>
-                                Pays
-                            </p>
-                        </a>
-                    </li>
-                    <li  class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>
-                                Paramètres
-                            </p>
-                        </a>
-                    </li>
+{{--                        <li class="nav-item ">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                                <i class="nav-icon fas fa-money-check-alt"></i>--}}
+{{--                                <p>--}}
+{{--                                    Paiements--}}
+{{--                                </p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+                        <li class="nav-item <?php echo (Str::startsWith($route, 'role')) ? "active" : '' ?>">
+                            <a href="{{route('role.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Roles
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item <?php echo (Str::startsWith($route, 'countries')) ? "active" : '' ?>">
+                            <a href="{{route('countries.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Pays
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Paramètres
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item <?php echo (Str::startsWith($route, 'template')) ? "active" : '' ?>">
+                            <a href="{{route('template.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Modeles
+                                </p>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </nav>
@@ -495,50 +706,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
+
+
     <div class="content-wrapper">
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
 
-                <div class="row mt-3 statistics-section">
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center red-stats-bg">
-                                <span class="number mr-2">O</span>
-                                <span class="title">Opérations</span>
+                @if(auth()->user()->hasRole(['Client']))
+                    <div class="row statistics-section">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center red-stats-bg">
+                                <span class="number mr-2">
+                                    {{App\Models\Operation::where('user_id',auth()->user()->id)->count()}}
+                                </span>
+                                    <span class="title">Opérations</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center blue-stats-bg">
+                                <span class="number mr-2"> {{App\Models\User::role('Operateur')->with('roles', 'country','city','company')
+                ->where('company_id', auth()->user()->company_id)->count()}}</span>
+                                    <span class="title">Opérateurs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center green-stats-bg">
+                                <span class="number mr-2">{{App\Models\User::role('Lecteur')->with('roles', 'country','city','company')
+                ->where('company_id', auth()->user()->company_id)->count()}}</span>
+                                    <span class="title">Lecteurs</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center blue-stats-bg">
-                                <span class="number mr-2">O</span>
-                                <span class="title">Opérateur</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center green-stats-bg">
-                                <span class="number mr-2">O</span>
-                                <span class="title">Lecteurs</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center orange-stats-bg">
-                                <span class="number mr-2">O</span>
-                                <span class="title">Jrs restant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-
-                <div class="mt-2">
-
-                </div>
+                @endif
+                @yield('ariane')
                 @include('admin.common.flash')
                 @yield('content')
             </div><!-- /.container-fluid -->
@@ -546,6 +754,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
 
     <!-- Main Footer -->
     <footer class="main-footer">
@@ -613,9 +822,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- AdminLTE App -->
 <script src=" {{ asset('assets/js/dashboard/admin-lte/adminlte.min.js') }} "></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 @yield('js-script')
 @yield("page-script")
+@yield('plugin-scripts')
 @yield("laraform_script1")
 @yield('plugin-scripts')
 </body>

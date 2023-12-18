@@ -11,7 +11,6 @@ class FormResponse extends Model
 {
     use HasFactory, CascadeSoftDeletes;
 
-
     protected $fillable = [
         'form_id', 'response_code', 'respondent_ip', 'respondent_user_agent'
     ];

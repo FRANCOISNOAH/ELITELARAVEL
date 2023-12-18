@@ -83,7 +83,7 @@
                 <div class="navbar-header">
                     <a href=@if (auth()
         ->user()
-    ->hasRole('Superadmin|Client|Opérateur|Lecteur|Admin')) "{{ route('theadministration.index') }}"    @else "#" @endif
+    ->hasRole('Superadmin|Client|Opérateur|Lecteur|Admin')) "{{ route('operation.index') }}"    @else "#" @endif
                     class="navbar-brand"><img class="b_logo"
                                               src="{{ asset('assets/images/bloo_logo.png') }}" /></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -91,8 +91,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
                 </div>
-
-
             </div>
             <!-- /.container-fluid -->
         </nav>
